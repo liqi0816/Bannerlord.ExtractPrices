@@ -46,8 +46,8 @@ namespace Bannerlord.ExtractPrices
 
         public void ExtractPrices()
         {
-            using var writer = new StreamWriter(Path.Combine(modDir, $"prices-{CampaignTime.Now.GetYear}-{CampaignTime.Now.GetDayOfYear}.csv"), append: false, encoding: Encoding.Default);
-            writer.WriteLine("Town,Item,Name,MSRP,Bid,Ask,Quantity,Supply,Demand,Fulfilled");
+            using var writer = new StreamWriter(Path.Combine(modDir, $"price-{CampaignTime.Now.GetYear}-{CampaignTime.Now.GetDayOfYear}.csv"), append: false, encoding: Encoding.Default);
+            writer.WriteLine("Town,Item,Name,MSRP,Bid,Ask,Quantity,Supply,Demand,Delivered");
             var itemFilter = new HashSet<ItemObject.ItemTypeEnum> { ItemObject.ItemTypeEnum.Animal, ItemObject.ItemTypeEnum.Horse, ItemObject.ItemTypeEnum.Goods };
             foreach (var town in Town.AllTowns)
             {
@@ -67,12 +67,6 @@ namespace Bannerlord.ExtractPrices
                 }
             }
             writer.Flush();
-        }
-
-        private void UnusedCode()
-        {
-            var model = new TaleWorlds.CampaignSystem.GameComponents.DefaultTradeItemPriceFactorModel();
-            var model2 = new TaleWorlds.CampaignSystem.GameComponents.DefaultSettlementEconomyModel();
         }
     }
 }
